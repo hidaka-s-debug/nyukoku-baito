@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>入国バイト募集｜SCG日本語学校</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Hiragino Kaku Gothic Pro','Noto Sans JP',sans-serif; background: #f9fafb; color: #111827; }
+button { font-family: inherit; cursor: pointer; }
+a { text-decoration: none; }
+input, textarea { font-family: inherit; }
+
+/* Modal backdrop */
+.modal-backdrop {
+  position: fixed; inset: 0; background: rgba(15,20,40,0.65);
+  z-index: 999; display: flex; align-items: flex-end; justify-content: center;
+}
+.modal-sheet {
+  background: #fff; border-radius: 24px 24px 0 0;
+  padding: 1.5rem 1.25rem 2.5rem;
+  width: 100%; max-width: 480px; max-height: 92vh; overflow-y: auto;
+}
+.drag-handle {
+  width: 40px; height: 4px; border-radius: 99px;
+  background: #e5e7eb; margin: 0 auto 1.25rem;
+}
+
+/* Admin */
+.admin-backdrop {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.65);
+  z-index: 9999; display: flex; align-items: flex-start;
+  justify-content: center; padding: 1rem; overflow-y: auto;
+}
+.admin-panel {
+  background: #fff; border-radius: 20px; padding: 1.5rem;
+  width: 100%; max-width: 680px; margin: 1rem 0;
+}
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th { padding: 8px 10px; text-align: left; color: #6b7280; font-weight: 600; white-space: nowrap; border-bottom: 2px solid #f3f4f6; }
+td { padding: 10px; border-bottom: 1px solid #f9fafb; }
+
+input[type=text], input[type=email], textarea {
+  width: 100%; padding: 12px 14px; font-size: 15px;
+  border: 1.5px solid #e5e7eb; border-radius: 12px;
+  outline: none; background: #fafafa;
+}
+input:focus, textarea:focus { border-color: #6366f1; }
+textarea { resize: none; font-size: 14px; }
+
+.hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<div style="background:#4f46e5;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-60px;right:-60px;width:220px;height:220px;border-radius:50%;background:#6366f1;opacity:0.5;"></div>
+  <div style="position:absolute;bottom:20px;left:-40px;width:160px;height:160px;border-radius:50%;background:#818cf8;opacity:0.35;"></div>
+
+  <!-- Nav -->
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem 0;position:relative;">
+    <span style="font-size:13px;font-weight:800;color:#e0e7ff;">SCG日本語学校</span>
+    <button onclick="openModal('mar26')" style="background:#fff;color:#4f46e5;border:none;border-radius:99px;padding:7px 16px;font-size:12px;font-weight:800;">申し込む →</button>
+  </div>
+
+  <div style="padding:2.5rem 1.25rem 0;position:relative;">
+    <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.15);border-radius:99px;padding:5px 14px;margin-bottom:1rem;">
+      <span>🌏</span>
+      <span style="font-size:12px;font-weight:700;color:#e0e7ff;">シンガク生限定 バイト募集</span>
+    </div>
+
+    <h1 style="font-size:clamp(26px,7vw,40px);font-weight:900;color:#fff;margin:0 0 14px;line-height:1.2;letter-spacing:-0.5px;">
+      留学生の<br>
+      <span style="background:#fbbf24;color:#1f2937;border-radius:8px;padding:2px 8px;display:inline-block;transform:rotate(-1.5deg);">第一歩</span>
+      <br>をサポートしよう✈️
+    </h1>
+
+    <p style="font-size:15px;color:#c7d2fe;line-height:1.7;margin:0 0 1.5rem;">
+      関空での出迎えから、住民登録・銀行口座開設まで。<br>
+      留学生の"はじめての日本"を最高の体験にしよう！
+    </p>
+
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:2rem;">
+      <span style="background:rgba(255,255,255,0.18);border-radius:99px;padding:6px 14px;font-size:12px;font-weight:700;color:#e0e7ff;">📍 京都本社</span>
+      <span style="background:rgba(255,255,255,0.18);border-radius:99px;padding:6px 14px;font-size:12px;font-weight:700;color:#e0e7ff;">🗓️ 週2〜OK</span>
+      <span style="background:rgba(255,255,255,0.18);border-radius:99px;padding:6px 14px;font-size:12px;font-weight:700;color:#e0e7ff;">💰 時給1,300円</span>
+      <span style="background:rgba(255,255,255,0.18);border-radius:99px;padding:6px 14px;font-size:12px;font-weight:700;color:#e0e7ff;">🎓 大学生歓迎</span>
+    </div>
+
+    <button onclick="openModal('mar26')" style="background:#fff;color:#4f46e5;border:none;border-radius:16px;padding:16px 28px;font-size:16px;font-weight:900;box-shadow:0 8px 24px rgba(0,0,0,0.15);display:inline-flex;align-items:center;gap:8px;">
+      <span>説明会に申し込む</span><span>🙋</span>
+    </button>
+  </div>
+
+  <svg viewBox="0 0 375 48" style="display:block;margin-top:2rem;width:100%;" preserveAspectRatio="none">
+    <path d="M0 48 C100 0 275 48 375 10 L375 48 Z" fill="#f9fafb"/>
+  </svg>
+</div>
+
+<!-- ── JOBS ── -->
+<div style="padding:2rem 1.25rem;">
+  <p style="font-size:11px;font-weight:800;color:#6366f1;letter-spacing:2px;margin:0 0 6px;">JOB DESCRIPTION</p>
+  <h2 style="font-size:22px;font-weight:900;margin:0 0 1.25rem;line-height:1.3;">こんなことを<br>やってもらいます💪</h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+    <div style="background:#fff;border-radius:16px;padding:1rem;border:1px solid #f3f4f6;box-shadow:0 1px 4px rgba(0,0,0,0.05);">
+      <div style="font-size:28px;margin-bottom:6px;">✈️</div>
+      <div style="font-weight:800;font-size:13px;margin-bottom:3px;">空港・駅の送迎</div>
+      <div style="font-size:11px;color:#9ca3af;line-height:1.5;">関空〜物件まで留学生をエスコート</div>
+    </div>
+    <div style="background:#fff;border-radius:16px;padding:1rem;border:1px solid #f3f4f6;box-shadow:0 1px 4px rgba(0,0,0,0.05);">
+      <div style="font-size:28px;margin-bottom:6px;">🎤</div>
+      <div style="font-weight:800;font-size:13px;margin-bottom:3px;">オリエンテーション補助</div>
+      <div style="font-size:11px;color:#9ca3af;line-height:1.5;">入国後の生活ガイダンスをサポート</div>
+    </div>
+    <div style="background:#fff;border-radius:16px;padding:1rem;border:1px solid #f3f4f6;box-shadow:0 1px 4px rgba(0,0,0,0.05);">
+      <div style="font-size:28px;margin-bottom:6px;">🏛️</div>
+      <div style="font-weight:800;font-size:13px;margin-bottom:3px;">住民登録サポート</div>
+      <div style="font-size:11px;color:#9ca3af;line-height:1.5;">区役所での手続きを一緒に行う</div>
+    </div>
+    <div style="background:#fff;border-radius:16px;padding:1rem;border:1px solid #f3f4f6;box-shadow:0 1px 4px rgba(0,0,0,0.05);">
+      <div style="font-size:28px;margin-bottom:6px;">📄</div>
+      <div style="font-weight:800;font-size:13px;margin-bottom:3px;">契約書作成事務</div>
+      <div style="font-size:11px;color:#9ca3af;line-height:1.5;">賃貸契約など各種書類の整備</div>
+    </div>
+    <div style="background:#fff;border-radius:16px;padding:1rem;border:1px solid #f3f4f6;box-shadow:0 1px 4px rgba(0,0,0,0.05);">
+      <div style="font-size:28px;margin-bottom:6px;">🏦</div>
+      <div style="font-weight:800;font-size:13px;margin-bottom:3px;">銀行口座開設補助</div>
+      <div style="font-size:11px;color:#9ca3af;line-height:1.5;">口座開設の案内・同行サポート</div>
+    </div>
+    <div style="background:#fff;border-radius:16px;padding:1rem;border:1px solid #f3f4f6;box-shadow:0 1px 4px rgba(0,0,0,0.05);">
+      <div style="font-size:28px;margin-bottom:6px;">📱</div>
+      <div style="font-weight:800;font-size:13px;margin-bottom:3px;">SIM設定サポート</div>
+      <div style="font-size:11px;color:#9ca3af;line-height:1.5;">物件引率時にSIMカード設定・WiFiルーター設置</div>
+    </div>
+    <div style="background:#fff;border-radius:16px;padding:1rem;border:1px solid #f3f4f6;box-shadow:0 1px 4px rgba(0,0,0,0.05);grid-column:span 2;">
+      <div style="font-size:28px;margin-bottom:6px;">💼</div>
+      <div style="font-weight:800;font-size:13px;margin-bottom:3px;">就職サポート補助</div>
+      <div style="font-size:11px;color:#9ca3af;line-height:1.5;">バイト探しや就活の相談対応</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── WHY ── -->
+<div style="padding:0 1.25rem 2rem;">
+  <p style="font-size:11px;font-weight:800;color:#6366f1;letter-spacing:2px;margin:0 0 6px;">WHY JOIN?</p>
+  <h2 style="font-size:22px;font-weight:900;margin:0 0 1.25rem;">やりがい3つ🌟</h2>
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    <div style="background:#fff;border-radius:16px;padding:1.25rem;border:1px solid #f3f4f6;display:flex;gap:14px;">
+      <div style="width:48px;height:48px;border-radius:14px;background:#eef2ff;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;">🌏</div>
+      <div>
+        <div style="font-weight:800;font-size:15px;margin-bottom:4px;">国際色豊かな現場</div>
+        <div style="font-size:13px;color:#6b7280;line-height:1.6;">ベトナム・ネパール・バングラデシュなど多国籍な留学生と関わる実践的な環境</div>
+      </div>
+    </div>
+    <div style="background:#fff;border-radius:16px;padding:1.25rem;border:1px solid #f3f4f6;display:flex;gap:14px;">
+      <div style="width:48px;height:48px;border-radius:14px;background:#eef2ff;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;">📈</div>
+      <div>
+        <div style="font-weight:800;font-size:15px;margin-bottom:4px;">実務スキルが身につく</div>
+        <div style="font-size:13px;color:#6b7280;line-height:1.6;">行政手続き・不動産契約・銀行口座開設など、社会人前に経験できる貴重な業務</div>
+      </div>
+    </div>
+    <div style="background:#fff;border-radius:16px;padding:1.25rem;border:1px solid #f3f4f6;display:flex;gap:14px;">
+      <div style="width:48px;height:48px;border-radius:14px;background:#eef2ff;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;">🤝</div>
+      <div>
+        <div style="font-weight:800;font-size:15px;margin-bottom:4px;">直接「ありがとう」が届く</div>
+        <div style="font-size:13px;color:#6b7280;line-height:1.6;">留学生の第一歩を一緒に歩む達成感。笑顔がモチベーションに</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── REQUIREMENTS ── -->
+<div style="margin:0 1.25rem 2rem;background:#fff;border-radius:20px;padding:1.5rem;border:1px solid #f3f4f6;">
+  <p style="font-size:11px;font-weight:800;color:#6366f1;letter-spacing:2px;margin:0 0 6px;">REQUIREMENTS</p>
+  <h2 style="font-size:20px;font-weight:900;margin:0 0 1.25rem;">募集要項📋</h2>
+  <div style="display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid #f9fafb;">
+    <span style="font-size:18px;width:28px;text-align:center;">📍</span>
+    <span style="font-size:12px;font-weight:800;color:#6366f1;min-width:72px;">勤務地</span>
+    <span style="font-size:14px;color:#374151;">京都本社（〒604-0857 中京区蒔絵屋町 SCGビル）</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid #f9fafb;">
+    <span style="font-size:18px;width:28px;text-align:center;">🗓️</span>
+    <span style="font-size:12px;font-weight:800;color:#6366f1;min-width:72px;">勤務頻度</span>
+    <span style="font-size:14px;color:#374151;">できるだけたくさん入れる方歓迎！（入国スケジュール次第）</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid #f9fafb;">
+    <span style="font-size:18px;width:28px;text-align:center;">⏰</span>
+    <span style="font-size:12px;font-weight:800;color:#6366f1;min-width:72px;">勤務時間</span>
+    <span style="font-size:14px;color:#374151;">入国スケジュールに合わせて都度相談</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid #f9fafb;">
+    <span style="font-size:18px;width:28px;text-align:center;">👤</span>
+    <span style="font-size:12px;font-weight:800;color:#6366f1;min-width:72px;">対象</span>
+    <span style="font-size:14px;color:#374151;">やる気があって元気な方なら誰でも！優しいそこのあなた！</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid #f9fafb;">
+    <span style="font-size:18px;width:28px;text-align:center;">📅</span>
+    <span style="font-size:12px;font-weight:800;color:#6366f1;min-width:72px;">契約期間</span>
+    <span style="font-size:14px;color:#374151;">4〜5月の短期バイト（集中して入れる方歓迎）</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid #f9fafb;">
+    <span style="font-size:18px;width:28px;text-align:center;">💰</span>
+    <span style="font-size:12px;font-weight:800;color:#6366f1;min-width:72px;">時給</span>
+    <span style="font-size:14px;color:#374151;">1,300円</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:12px;padding:11px 0;">
+    <span style="font-size:18px;width:28px;text-align:center;">🚃</span>
+    <span style="font-size:12px;font-weight:800;color:#6366f1;min-width:72px;">交通費</span>
+    <span style="font-size:14px;color:#374151;">支給あり</span>
+  </div>
+</div>
+
+<!-- ── FLOW ── -->
+<div style="padding:0 1.25rem 2rem;">
+  <p style="font-size:11px;font-weight:800;color:#6366f1;letter-spacing:2px;margin:0 0 6px;">DAY FLOW</p>
+  <h2 style="font-size:20px;font-weight:900;margin:0 0 1.25rem;">入国当日の流れ🗺️</h2>
+
+  <div style="display:flex;gap:14px;">
+    <div style="display:flex;flex-direction:column;align-items:center;">
+      <div style="width:36px;height:36px;border-radius:50%;background:#6366f1;color:#fff;font-weight:900;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">01</div>
+      <div style="width:2px;height:28px;background:#e0e7ff;margin:3px 0;"></div>
+    </div>
+    <div style="padding-top:7px;"><div style="font-weight:800;font-size:15px;">関空 北到着口</div><div style="font-size:12px;color:#9ca3af;padding-bottom:20px;">名簿確認・名札・Slack報告</div></div>
+  </div>
+  <div style="display:flex;gap:14px;">
+    <div style="display:flex;flex-direction:column;align-items:center;">
+      <div style="width:36px;height:36px;border-radius:50%;background:#6366f1;color:#fff;font-weight:900;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">02</div>
+      <div style="width:2px;height:28px;background:#e0e7ff;margin:3px 0;"></div>
+    </div>
+    <div style="padding-top:7px;"><div style="font-weight:800;font-size:15px;">バスで京都駅へ</div><div style="font-size:12px;color:#9ca3af;padding-bottom:20px;">留学生と一緒に移動</div></div>
+  </div>
+  <div style="display:flex;gap:14px;">
+    <div style="display:flex;flex-direction:column;align-items:center;">
+      <div style="width:36px;height:36px;border-radius:50%;background:#6366f1;color:#fff;font-weight:900;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">03</div>
+      <div style="width:2px;height:28px;background:#e0e7ff;margin:3px 0;"></div>
+    </div>
+    <div style="padding-top:7px;"><div style="font-weight:800;font-size:15px;">荷物を赤帽に預ける</div><div style="font-size:12px;color:#9ca3af;padding-bottom:20px;">業者と合流・配送手配</div></div>
+  </div>
+  <div style="display:flex;gap:14px;">
+    <div style="display:flex;flex-direction:column;align-items:center;">
+      <div style="width:36px;height:36px;border-radius:50%;background:#6366f1;color:#fff;font-weight:900;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">04</div>
+      <div style="width:2px;height:28px;background:#e0e7ff;margin:3px 0;"></div>
+    </div>
+    <div style="padding-top:7px;"><div style="font-weight:800;font-size:15px;">物件へ引率</div><div style="font-size:12px;color:#9ca3af;padding-bottom:20px;">鍵渡し・生活説明・SIMカード設定</div></div>
+  </div>
+  <div style="display:flex;gap:14px;">
+    <div style="display:flex;flex-direction:column;align-items:center;">
+      <div style="width:36px;height:36px;border-radius:50%;background:#6366f1;color:#fff;font-weight:900;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">05</div>
+    </div>
+    <div style="padding-top:7px;"><div style="font-weight:800;font-size:15px;">翌日 各種手続き</div><div style="font-size:12px;color:#9ca3af;padding-bottom:20px;">住民登録・銀行口座など</div></div>
+  </div>
+</div>
+
+<!-- ── SESSIONS ── -->
+<div style="padding:0 1.25rem 1rem;">
+  <p style="font-size:11px;font-weight:800;color:#6366f1;letter-spacing:2px;margin:0 0 6px;">ONLINE BRIEFING</p>
+  <h2 style="font-size:20px;font-weight:900;margin:0 0 4px;">オンライン説明会📅</h2>
+  <p style="font-size:13px;color:#9ca3af;margin:0 0 1.25rem;">どちらか都合のいい日程にどうぞ！</p>
+
+  <!-- Mar 26 -->
+  <div style="background:#fff;border-radius:20px;padding:1.25rem;border:2px solid rgba(99,102,241,0.2);margin-bottom:12px;box-shadow:0 4px 16px rgba(99,102,241,0.09);">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
+      <div>
+        <div style="font-size:11px;font-weight:800;color:#6366f1;letter-spacing:1px;margin-bottom:3px;">Google Meet オンライン開催</div>
+        <div style="font-weight:900;font-size:19px;">🌙 3月26日（木）</div>
+        <div style="font-size:15px;font-weight:700;color:#6366f1;">18:00 – 19:00（Asia/Tokyo）</div>
+      </div>
+      <div style="background:#eef2ff;border-radius:14px;padding:10px 14px;text-align:center;flex-shrink:0;">
+        <div style="font-size:26px;">🌙</div>
+        <div style="font-size:10px;font-weight:700;color:#6366f1;">オンライン</div>
+      </div>
+    </div>
+    <div style="background:#eef2ff;border-radius:12px;padding:10px 14px;margin-bottom:12px;">
+      <div style="font-size:11px;font-weight:700;color:#6366f1;margin-bottom:6px;">📹 ビデオ通話リンク</div>
+      <a href="https://meet.google.com/udr-zsjt-rcv" target="_blank" style="display:block;color:#6366f1;font-weight:800;font-size:14px;word-break:break-all;margin-bottom:6px;">https://meet.google.com/udr-zsjt-rcv</a>
+      <div style="font-size:11px;color:#6b7280;">
+        📞 ダイヤルイン: +81 3-4545-0450　PIN: 378 351 800 5367#<br>
+        <a href="https://tel.meet/udr-zsjt-rcv?pin=3783518005367" target="_blank" style="color:#6366f1;font-size:10px;">その他の電話番号 →</a>
+      </div>
+    </div>
+    <button onclick="openModal('mar26')" style="width:100%;background:#6366f1;color:#fff;border:none;border-radius:13px;padding:14px;font-size:15px;font-weight:800;">この日程で申し込む 🙋</button>
+  </div>
+
+  <!-- Mar 28 -->
+  <div style="background:#fff;border-radius:20px;padding:1.25rem;border:2px solid rgba(245,158,11,0.2);margin-bottom:12px;box-shadow:0 4px 16px rgba(245,158,11,0.09);">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;">
+      <div>
+        <div style="font-size:11px;font-weight:800;color:#f59e0b;letter-spacing:1px;margin-bottom:3px;">Google Meet オンライン開催</div>
+        <div style="font-weight:900;font-size:19px;">☀️ 3月28日（土）</div>
+        <div style="font-size:15px;font-weight:700;color:#f59e0b;">17:00 – 18:00（Asia/Tokyo）</div>
+      </div>
+      <div style="background:#fffbeb;border-radius:14px;padding:10px 14px;text-align:center;flex-shrink:0;">
+        <div style="font-size:26px;">☀️</div>
+        <div style="font-size:10px;font-weight:700;color:#f59e0b;">オンライン</div>
+      </div>
+    </div>
+    <div style="background:#fffbeb;border-radius:12px;padding:10px 14px;margin-bottom:12px;">
+      <div style="font-size:11px;font-weight:700;color:#f59e0b;margin-bottom:6px;">📹 ビデオ通話リンク</div>
+      <a href="https://meet.google.com/ozh-gdyp-hnq" target="_blank" style="display:block;color:#f59e0b;font-weight:800;font-size:14px;word-break:break-all;margin-bottom:6px;">https://meet.google.com/ozh-gdyp-hnq</a>
+      <div style="font-size:11px;color:#6b7280;">
+        📞 ダイヤルイン: +81 3-4545-0450　PIN: 378 263 779 8800#<br>
+        <a href="https://tel.meet/ozh-gdyp-hnq?pin=3782637798800" target="_blank" style="color:#f59e0b;font-size:10px;">その他の電話番号 →</a>
+      </div>
+    </div>
+    <button onclick="openModal('mar28')" style="width:100%;background:#f59e0b;color:#fff;border:none;border-radius:13px;padding:14px;font-size:15px;font-weight:800;">この日程で申し込む 🙋</button>
+  </div>
+
+  <!-- Inquiry -->
+  <div style="background:#fef9c3;border:2px solid #fde68a;border-radius:20px;padding:1.25rem;text-align:center;">
+    <div style="font-size:30px;margin-bottom:6px;">🤔</div>
+    <div style="font-weight:900;font-size:16px;color:#92400e;margin-bottom:4px;">どちらも都合が難しい…</div>
+    <div style="font-size:13px;color:#b45309;line-height:1.6;margin-bottom:14px;">大丈夫！個別に日程調整できます。<br>まずは気軽に相談してみてね😊</div>
+    <button onclick="openModal('inquiry')" style="background:#d97706;color:#fff;border:none;border-radius:13px;padding:13px 28px;font-size:15px;font-weight:800;">個別に相談する 📩</button>
+  </div>
+</div>
+
+<!-- ── CTA ── -->
+<div style="margin:2rem 1.25rem;background:linear-gradient(135deg,#6366f1,#8b5cf6);border-radius:24px;padding:2rem 1.5rem;text-align:center;color:#fff;">
+  <div style="font-size:42px;margin-bottom:10px;">✈️🌏</div>
+  <h3 style="margin:0 0 8px;font-weight:900;font-size:20px;">まずは説明会に来てみて！</h3>
+  <p style="font-size:13px;color:#c7d2fe;margin:0 0 1.5rem;line-height:1.7;">30分でサクッと説明します。<br>来て合わなければOK！まずは顔出すだけでもOK👋</p>
+  <div style="display:flex;flex-direction:column;gap:10px;">
+    <button onclick="openModal('mar26')" style="background:#fff;color:#4f46e5;border:none;border-radius:14px;padding:14px;font-size:15px;font-weight:800;">🌙 3月26日（木）　18:00 – 19:00</button>
+    <button onclick="openModal('mar28')" style="background:#fff;color:#4f46e5;border:none;border-radius:14px;padding:14px;font-size:15px;font-weight:800;">☀️ 3月28日（土）　17:00 – 18:00</button>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<div style="background:#1f2937;padding:1.5rem 1.25rem;text-align:center;" id="footer">
+  <p style="color:#6b7280;font-size:12px;line-height:1.8;">
+    SCG日本語学校 / 成基コミュニティグループ<br>
+    〒604-0857 京都市中京区蒔絵屋町 SCGビル<br>
+    hidaka-s@mail.seiki.co.jp<br>
+    <span style="font-size:10px;">© 2025 SCG Language School</span>
+  </p>
+</div>
+
+<!-- ── APPLY MODAL ── -->
+<div id="modal" class="modal-backdrop hidden" onclick="handleBackdropClick(event)">
+  <div class="modal-sheet">
+    <div class="drag-handle"></div>
+    <div id="modal-form">
+      <h3 id="modal-title" style="margin:0 0 12px;font-weight:900;font-size:18px;"></h3>
+      <div id="modal-session-badge" style="border-radius:12px;padding:10px 14px;font-size:13px;font-weight:800;margin-bottom:1.25rem;"></div>
+      <div id="modal-inquiry-note" class="hidden" style="background:#fef9c3;color:#92400e;border-radius:12px;padding:10px 14px;font-size:13px;margin-bottom:1.25rem;line-height:1.6;">
+        日程が合わない方も大歓迎！お気軽にご相談ください😊
+      </div>
+
+      <div style="margin-bottom:1rem;">
+        <label style="font-size:13px;font-weight:700;display:block;margin-bottom:5px;color:#374151;">お名前 ＊</label>
+        <input type="text" id="f-name" placeholder="山田 太郎">
+      </div>
+      <div style="margin-bottom:1rem;">
+        <label style="font-size:13px;font-weight:700;display:block;margin-bottom:5px;color:#374151;">メールアドレス ＊</label>
+        <input type="email" id="f-email" placeholder="taro@example.com">
+      </div>
+      <div style="margin-bottom:1rem;">
+        <label style="font-size:13px;font-weight:700;display:block;margin-bottom:5px;color:#374151;">大学名・学部</label>
+        <input type="text" id="f-university" placeholder="○○大学 △△学部 3回生">
+      </div>
+      <div style="margin-bottom:1.25rem;">
+        <label id="msg-label" style="font-size:13px;font-weight:700;display:block;margin-bottom:5px;color:#374151;">一言メッセージ（任意）</label>
+        <textarea id="f-message" rows="3" placeholder="志望動機や質問など、気軽に書いてね👋"></textarea>
+      </div>
+
+      <div id="form-error" style="color:#ef4444;font-size:13px;font-weight:600;margin-bottom:12px;display:none;"></div>
+
+      <button id="submit-btn" onclick="submitForm()" style="width:100%;padding:15px;background:#6366f1;color:#fff;border:none;border-radius:14px;font-size:16px;font-weight:900;">
+        申し込む 🙋
+      </button>
+      <p style="font-size:11px;color:#9ca3af;text-align:center;margin-top:10px;">申込後に確認メールをお送りします</p>
+    </div>
+
+    <!-- Done state -->
+    <div id="modal-done" class="hidden" style="text-align:center;padding:1.5rem 0 1rem;">
+      <div style="font-size:56px;margin-bottom:12px;">🎉</div>
+      <h3 style="margin:0 0 8px;font-weight:900;font-size:20px;">申込完了！</h3>
+      <p id="done-msg" style="color:#6b7280;font-size:14px;line-height:1.8;margin:0 0 1.5rem;"></p>
+      <a id="done-meet-link" href="#" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;padding:14px 20px;border-radius:14px;font-size:14px;font-weight:800;margin-bottom:10px;display:none;">
+        <span>📹</span><span id="done-meet-label"></span>
+      </a>
+      <button onclick="closeModal()" style="width:100%;padding:14px;background:#f3f4f6;border:none;border-radius:14px;font-size:15px;font-weight:700;color:#374151;">閉じる</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── ADMIN PANEL ── -->
+<div id="admin-panel" class="admin-backdrop hidden">
+  <div class="admin-panel">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem;">
+      <h2 style="margin:0;font-size:18px;font-weight:800;">📊 申込管理 <span id="admin-count" style="font-weight:400;font-size:14px;color:#9ca3af;"></span></h2>
+      <button onclick="closeAdmin()" style="background:none;border:none;font-size:22px;color:#9ca3af;">✕</button>
+    </div>
+    <div id="admin-content" style="overflow-x:auto;"></div>
+  </div>
+</div>
+
+<script>
+var GAS_URL = "https://script.google.com/macros/s/AKfycbzpr4Mc41XXtU8PnXiy5_1Qqje32O05sYMC1VDWyV43dSJg566k6_eJrENpEuirGbLz/exec";
+
+var SESSIONS = {
+  mar26: { label: "3月26日（木）18:00 – 19:00", color: "#6366f1", bg: "#eef2ff", meet: "https://meet.google.com/udr-zsjt-rcv" },
+  mar28: { label: "3月28日（土）17:00 – 18:00", color: "#f59e0b", bg: "#fffbeb", meet: "https://meet.google.com/ozh-gdyp-hnq" },
+  inquiry: { label: "個別相談・問い合わせ", color: "#d97706", bg: "#fef9c3", meet: "" }
+};
+
+var currentSession = null;
+var footerTaps = 0;
+
+document.getElementById('footer').addEventListener('click', function() {
+  footerTaps++;
+  if (footerTaps >= 5) { footerTaps = 0; openAdmin(); }
+});
+
+function openModal(sessionId) {
+  currentSession = sessionId;
+  var s = SESSIONS[sessionId];
+  var isInquiry = sessionId === 'inquiry';
+
+  document.getElementById('modal-title').textContent = isInquiry ? '📩 個別相談・問い合わせ' : '📝 説明会に申し込む';
+
+  var badge = document.getElementById('modal-session-badge');
+  badge.textContent = (s.label.split('）')[0].includes('月') ? (sessionId === 'mar26' ? '🌙 ' : '☀️ ') : '') + s.label;
+  badge.style.background = s.bg;
+  badge.style.color = s.color;
+  badge.style.display = isInquiry ? 'none' : 'block';
+
+  var note = document.getElementById('modal-inquiry-note');
+  note.style.display = isInquiry ? 'block' : 'none';
+
+  document.getElementById('msg-label').textContent = isInquiry ? 'ご相談内容' : '一言メッセージ（任意）';
+  document.getElementById('f-message').placeholder = isInquiry ? 'いつなら都合が良いか、質問など何でも！' : '志望動機や質問など、気軽に書いてね👋';
+  document.getElementById('submit-btn').textContent = isInquiry ? '相談を送る ✉️' : '申し込む 🙋';
+  document.getElementById('submit-btn').style.background = s.color;
+
+  document.getElementById('modal-form').classList.remove('hidden');
+  document.getElementById('modal-done').classList.add('hidden');
+  document.getElementById('form-error').style.display = 'none';
+
+  // reset fields
+  ['f-name','f-email','f-university','f-message'].forEach(function(id) { document.getElementById(id).value = ''; });
+
+  document.getElementById('modal').classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.add('hidden');
+  document.body.style.overflow = '';
+}
+
+function handleBackdropClick(e) {
+  if (e.target === document.getElementById('modal')) closeModal();
+}
+
+function showError(msg) {
+  var el = document.getElementById('form-error');
+  el.textContent = '⚠ ' + msg;
+  el.style.display = 'block';
+}
+
+function submitForm() {
+  var name = document.getElementById('f-name').value.trim();
+  var email = document.getElementById('f-email').value.trim();
+  var university = document.getElementById('f-university').value.trim();
+  var message = document.getElementById('f-message').value.trim();
+
+  if (!name) { showError('お名前を入力してください'); return; }
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showError('正しいメールアドレスを入力してください'); return; }
+
+  var btn = document.getElementById('submit-btn');
+  btn.textContent = '送信中...';
+  btn.disabled = true;
+  document.getElementById('form-error').style.display = 'none';
+
+  var payload = { name: name, email: email, university: university, message: message, session: currentSession };
+
+  fetch(GAS_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain' },
+    body: JSON.stringify(payload)
+  })
+  .then(function() { showDone(); })
+  .catch(function() { showDone(); }); // GASはCORSエラーでも処理完了している場合があるため
+}
+
+function showDone() {
+  var isInquiry = currentSession === 'inquiry';
+  var s = SESSIONS[currentSession];
+
+  document.getElementById('done-msg').textContent = isInquiry
+    ? 'ご連絡ありがとうございます！\nスタッフより折り返しご連絡します😊'
+    : '確認メールをお送りしました🙌\n当日の参加をお待ちしています！';
+
+  var meetLink = document.getElementById('done-meet-link');
+  if (!isInquiry && s.meet) {
+    meetLink.href = s.meet;
+    meetLink.style.display = 'flex';
+    meetLink.style.background = s.bg;
+    meetLink.style.color = s.color;
+    document.getElementById('done-meet-label').textContent = 'Google Meet に参加する（' + s.label.split('）')[0].replace(/[🌙☀️]/g,'').trim() + '）';
+  } else {
+    meetLink.style.display = 'none';
+  }
+
+  document.getElementById('modal-form').classList.add('hidden');
+  document.getElementById('modal-done').classList.remove('hidden');
+}
+
+// ── Admin ──
+function openAdmin() {
+  document.getElementById('admin-panel').classList.remove('hidden');
+  loadAdminData();
+}
+function closeAdmin() {
+  document.getElementById('admin-panel').classList.add('hidden');
+}
+
+function loadAdminData() {
+  var content = document.getElementById('admin-content');
+  content.innerHTML = '<p style="text-align:center;color:#9ca3af;padding:1rem;">スプレッドシートで管理中...<br><a href="https://sheets.google.com" target="_blank" style="color:#6366f1;font-weight:700;">Googleスプレッドシートを開く →</a></p>';
+  document.getElementById('admin-count').textContent = '';
+}
+</script>
+</body>
+</html>
